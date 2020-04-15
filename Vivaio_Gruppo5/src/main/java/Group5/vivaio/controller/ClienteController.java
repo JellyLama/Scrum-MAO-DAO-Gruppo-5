@@ -5,8 +5,14 @@
  */
 package Group5.vivaio.controller;
 
+import Group5.vivaio.dao.ClienteDao;
+import Group5.vivaio.entities.Cliente;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,37 +29,41 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/clienti")
+@CrossOrigin(allowedHeaders = "*", origins = "*")
 public class ClienteController
 {
-    
-    @GetMapping()
-    public List<Object> list()
+
+    @Autowired
+    ClienteDao clienteDao;
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Cliente> getAllClienti()
     {
-        return null;
+        return (List<Cliente>) clienteDao.findAll();
     }
-    
-    @GetMapping("/{id}")
-    public Object get( @PathVariable String id )
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Cliente getClienteById( @PathVariable Long id )
     {
-        return null;
+        return clienteDao.findById(id).get();
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<?> put( @PathVariable String id, @RequestBody Object input )
     {
         return null;
     }
-    
-    @PostMapping
-    public ResponseEntity<?> post( @RequestBody Object input )
+
+    @PostMapping()
+    public void addCliente(HttpServletRequest request, @RequestBody Cliente c)
     {
-        return null;
+        clienteDao.save(c);
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete( @PathVariable String id )
+    public void deleteCliente( @PathVariable Long id )
     {
-        return null;
+        clienteDao.deleteById(id);
     }
-    
+
 }
