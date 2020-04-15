@@ -10,7 +10,7 @@
     <class>entity.Cliente</class>
     <class>entity.Dipendente</class>
     <class>entity.DettagliAttività</class>
-    <class>entity.Attività</class>
+    <class>entity.Attivita</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BDT"/>
       <property name="javax.persistence.jdbc.password" value="USER1"/>

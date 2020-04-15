@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
  * @author Bachir_Karim
  */
 @Entity
-public class Attività implements Serializable
+public class Attivita implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
@@ -153,11 +153,11 @@ public class Attività implements Serializable
     public boolean equals( Object object )
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if( !(object instanceof Attività) )
+        if( !(object instanceof Attivita) )
         {
             return false;
         }
-        Attività other = (Attività) object;
+        Attivita other = (Attivita) object;
         if( (this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)) )
         {
             return false;
