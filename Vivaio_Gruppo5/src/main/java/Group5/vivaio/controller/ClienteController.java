@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Bachir_Karim
  */
 @RestController
-@RequestMapping("/url")
+@RequestMapping("/clienti")
 public class ClienteController
 {
     
