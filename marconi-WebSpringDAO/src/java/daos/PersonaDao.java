@@ -16,7 +16,6 @@ import javax.persistence.Tuple;
 public interface PersonaDao {
     
     List<Persona> findAll();
-    //List<Persona> findById(Long id);
     Persona findById(Long id);
     List<Persona> findByNome(String nome);
     List<Persona> findByCognome(String cognome);
