@@ -3,6 +3,7 @@
  */
 package entity;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Cacheable(false)
-public class Prestazione {
+public class Prestazione implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
