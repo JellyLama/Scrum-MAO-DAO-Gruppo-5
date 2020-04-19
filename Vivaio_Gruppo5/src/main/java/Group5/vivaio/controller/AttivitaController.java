@@ -5,13 +5,14 @@
  */
 package Group5.vivaio.controller;
 
+import Group5.vivaio.dao.AttivitaDao;
+import Group5.vivaio.entities.Attivita;
 import java.util.List;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,35 +26,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/attivita")
 public class AttivitaController
 {
+    @Autowired
+    AttivitaDao attivitaDao;
     
     @GetMapping()
-    public List<Object> list()
+    public List<Attivita> getAllAttivita()
     {
-        return null;
+        return (List<Attivita>) attivitaDao.findAll();
     }
     
     @GetMapping("/{id}")
-    public Object get( @PathVariable String id )
+    public Attivita get( @PathVariable Long id )
     {
-        return null;
+        return attivitaDao.findById(id).get();
     }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<?> put( @PathVariable String id, @RequestBody Object input )
-    {
-        return null;
-    }
-    
+
     @PostMapping
-    public ResponseEntity<?> post( @RequestBody Object input )
+    public void post( @RequestBody Attivita a )
     {
-        return null;
+        attivitaDao.save(a);
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete( @PathVariable String id )
+    public void delete( @PathVariable Long id )
     {
-        return null;
+        attivitaDao.deleteById(id);
     }
     
 }
