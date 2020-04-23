@@ -13,7 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Bachir_Karim
  */
-public interface ClienteDao extends CrudRepository<Cliente, Long>
-{
+public interface ClienteDao extends CrudRepository<Cliente, Long>{
+    Cliente findByNomeAndCognomeAndPassword(String nome, String cognome, String password);
     
 }

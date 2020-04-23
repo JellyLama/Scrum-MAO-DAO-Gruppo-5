@@ -57,5 +57,10 @@ public class ClienteController
     {
         clienteDao.deleteById(id);
     }
+    
+    @GetMapping(params ={ "nome", "cognome", "password"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void findClienteByNomeCognomePassword(){
+        
+    }
 
 }
