@@ -15,18 +15,18 @@ and open the template in the editor.
     <body>
         <h1> Registrazione </h1>
         <label for="fname">Cognome:</label><br>
-        <input type="text" id="fname" name="fname" placeholder="Bachir"><br>
+        <input type="text" id="cognome" name="fname" placeholder="Bachir"><br>
         <label for="lname">Nome:</label><br>
-        <input type="text" id="lname" name="lname" placeholder="Karim"><br>
+        <input type="text" id="nome" name="lname" placeholder="Karim"><br>
         <label for="lname">Password:</label><br>
         <input type="password" id="password" name="password" placeholder="Password"><br>
         <label for="telephone">Telefono:</label><br>
-        <input type="text" id="telephone" name="telefono" placeholder="312 345 3213"><br>
-        <input type="submit" value="Submit">
+        <input type="text" id="telephone" name="telefono" placeholder="312 3453213"><br>
+        <input type="submit" class="registrati" value="Registrati">
         <script>
             //init APP
             $(document).ready(function () {
-                APP.getDettagliAttivita();
+                $("registrati").on("click", APP.insertCliente);
             });
         </script>
     </body>
