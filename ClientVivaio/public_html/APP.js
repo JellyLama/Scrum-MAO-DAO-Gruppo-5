@@ -121,7 +121,7 @@ var APP =
                 var nome = $("#nome").val();
                 var cognome = $("#cognome").val();
                 var password = $("#password").val();
-                var url = "http://localhost:8080/clienti?nome="+nome+"&cognome"+cognome+"&password="+password;
+                var url = "http://localhost:8080/clienti?nome="+nome+"&cognome="+cognome+"&password="+password;
                 
                 $.ajax(
                         {
