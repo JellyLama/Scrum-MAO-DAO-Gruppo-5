@@ -67,16 +67,19 @@ var APP =
                             + '<th>tipo</th>'
                             + '<th>nome</th>'
                             + '<th>Necessita Piante</th>'
+                            + '<th>Costo Per Ora</th>'
                             + '</tr>';
                 for (i = 0; i < dettagliAttivita.length; i++) {
                     var id = dettagliAttivita[i].id;
                     var nome = dettagliAttivita[i].tipo;
                     var descriione = dettagliAttivita[i].nome;
                     var stagioneFioritura = dettagliAttivita[i].necessitaPiante;
+                    var costoPerOra = dettagliAttivita[i].costoPerOra;
                     tabellaDettagliAttivita += '<tr>'
                             + '<td>' + nome + '</td>'
                             + '<td>' + descriione + '</td>'
                             + '<td>' + stagioneFioritura + '</td>'
+                            + '<td>' + costoPerOra + '</td>'
                             + '</tr>';
                 }
                     document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
