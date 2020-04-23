@@ -38,4 +38,7 @@ public class DettagliAttivita implements Serializable
     
     @Basic
     private boolean necessitaPiante;
+    
+    @Basic
+    private float costoPerOra;
 }

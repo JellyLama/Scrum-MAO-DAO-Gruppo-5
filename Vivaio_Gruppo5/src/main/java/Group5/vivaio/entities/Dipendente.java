@@ -46,9 +46,6 @@ public class Dipendente implements Serializable
     @Basic
     private String qualifica;
     
-    @Basic
-    private float costoPerOra;
-
     @OneToOne
     private Specie specie;
 }
