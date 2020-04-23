@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -59,8 +60,8 @@ public class ClienteController
     }
     
     @GetMapping(params ={ "nome", "cognome", "password"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void findClienteByNomeCognomePassword(){
-        
+    public Cliente findClienteByNomeCognomePassword(HttpServletRequest request, @RequestParam("nome") String nome, @RequestParam("cognome") String cognome, @RequestParam("password") String password){
+        return clienteDao.findByNomeAndCognomeAndPassword(nome, cognome, password).get();
     }
 
 }

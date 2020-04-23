@@ -6,6 +6,7 @@
 package Group5.vivaio.dao;
 
 import Group5.vivaio.entities.Cliente;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 
@@ -14,6 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Bachir_Karim
  */
 public interface ClienteDao extends CrudRepository<Cliente, Long>{
-    Cliente findByNomeAndCognomeAndPassword(String nome, String cognome, String password);
+    Optional<Cliente> findByNomeAndCognomeAndPassword(String nome, String cognome, String password);
     
 }
