@@ -29,7 +29,10 @@ public class Specie implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Basic
+    private String nome;
+    
     @Basic
     private String modoColtivazione;
     

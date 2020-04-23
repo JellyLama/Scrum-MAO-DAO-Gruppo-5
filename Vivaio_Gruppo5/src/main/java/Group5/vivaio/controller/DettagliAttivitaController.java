@@ -5,8 +5,8 @@
  */
 package Group5.vivaio.controller;
 
-import Group5.vivaio.dao.TipoDao;
-import Group5.vivaio.entities.Tipo;
+import Group5.vivaio.dao.DettagliAttivitaDao;
+import Group5.vivaio.entities.DettagliAttivita;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,35 +24,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Bachir_Karim
  */
 @RestController
-@RequestMapping("/tipi")
+@RequestMapping("/dettagliattivita")
 @CrossOrigin(allowedHeaders = "*", origins = "*")
-public class TipoController
+public class DettagliAttivitaController
 {
     @Autowired
-    TipoDao tipoDao;
+    DettagliAttivitaDao dettagliAttivitaDao;
     
     @GetMapping()
-    public List<Tipo> getAllTipi()
+    public List<DettagliAttivita> getAllDettagliAttivita()
     {
-        return (List<Tipo>) tipoDao.findAll();
+        return (List<DettagliAttivita>) dettagliAttivitaDao.findAll();
     }
     
     @GetMapping("/{id}")
-    public Tipo get( @PathVariable Long id )
+    public DettagliAttivita get( @PathVariable Long id )
     {
-        return tipoDao.findById(id).get();
+        return dettagliAttivitaDao.findById(id).get();
     }
     
     @PostMapping
-    public void post( @RequestBody Tipo t )
+    public void post( @RequestBody DettagliAttivita t )
     {
-        tipoDao.save(t);
+        dettagliAttivitaDao.save(t);
     }
     
     @DeleteMapping("/{id}")
     public void delete( @PathVariable Long id )
     {
-        tipoDao.deleteById(id);
+        dettagliAttivitaDao.deleteById(id);
     }
     
 }
