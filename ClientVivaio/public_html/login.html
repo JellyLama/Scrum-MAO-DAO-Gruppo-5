@@ -15,17 +15,17 @@ and open the template in the editor.
     <body>
         <h1> Login </h1>
   
-        <label for="fname">Cognome:</label><br>
-        <input type="text" id="fname" name="fname" placeholder="Bachir"><br>
-        <label for="lname">Nome:</label><br>
-        <input type="text" id="lname" name="lname" placeholder="Karim"><br><br>
-        <label for="lname">Password:</label><br>
-        <input type="text" id="lname" name="lname" placeholder="Password"><br><br>
-        <input type="submit" value="Submit">
+        <label for="cognome">Cognome:</label><br>
+        <input type="text" id="cognome" name="cognome" placeholder="Bachir"><br>
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" placeholder="Karim"><br><br>
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password" placeholder="Password"><br><br>
+        <input type="submit" value="Submit" id="submit">
         <script>
             //init APP
             $(document).ready(function () {
-                APP.getDettagliAttivita();
+                $("#submit").on("click", APP.getUtenteByNomeByCognomeByPassword);
             });
         </script>
     </body>

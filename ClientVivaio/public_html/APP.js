@@ -87,10 +87,14 @@ var APP =
             insertCliente: function ()
             {
 
-                var cognome = $("#cognome").val();;
-                var nome = $("#nome").val();;
-                var password = $("#password").val();;
-                var telefono = $("#telefono").val();;
+                var cognome = $("#cognome").val();
+                ;
+                var nome = $("#nome").val();
+                ;
+                var password = $("#password").val();
+                ;
+                var telefono = $("#telefono").val();
+                ;
                 $.ajax(
                         {
                             url: "http://localhost:8080/clienti",
@@ -107,10 +111,32 @@ var APP =
                             ),
                             success: function (data, status) {
 
-                            
+
+                            }
+                        }
+                );
+            },
+            getUtenteByNomeByCognomeByPassword: function ()
+            {
+                var nome = $("#nome").val();
+                var cognome = $("#cognome").val();
+                var password = $("#password").val();
+                var url = "http://localhost:8080/clienti?nome="+nome+"&cognome"+cognome+"&password="+password;
+                
+                $.ajax(
+                        {
+                            url: url,
+                            method: "GET",
+                            success: function (data, status) {
+                                if(status === 200){
+                                    location.assign("index.html");                               
+                                }
                             }
                         }
                 );
             }
+
+
+
 
         }
