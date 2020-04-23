@@ -41,6 +41,9 @@ public class Dipendente implements Serializable
     private String nome;
     
     @Basic
+    private String password;
+    
+    @Basic
     private String annoAssunzione;
     
     @Basic

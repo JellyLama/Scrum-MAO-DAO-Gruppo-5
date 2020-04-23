@@ -37,6 +37,9 @@ public class Cliente implements Serializable
     private String nome;
     
     @Basic
+    private String password;
+    
+    @Basic
     private String tipo;
     
     @Basic
