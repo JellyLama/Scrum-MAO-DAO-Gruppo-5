@@ -128,8 +128,10 @@ var APP =
                             url: url,
                             method: "GET",
                             success: function (data, status) {
-                                if(status === 200){
-                                    location.assign("index.html");                               
+                            },
+                            statusCode: {
+                                200: function (){
+                                    location.assign("index.html");
                                 }
                             }
                         }
