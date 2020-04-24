@@ -87,17 +87,12 @@ var APP =
             insertCliente: function ()
             {
 
-                var cognome = $("#cognome").val();
-                ;
-                var nome = $("#nome").val();
-                ;
-                
                 var username = $("#username").val();
-                ;
+                
                 var password = $("#password").val();
-                ;
+                
                 var telefono = $("#telefono").val();
-                ;
+                
                 $.ajax(
                         {
                             url: "http://localhost:8080/clienti",
@@ -165,4 +160,4 @@ var APP =
 
 
 
-        }
+        };
