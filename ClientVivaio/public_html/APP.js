@@ -67,6 +67,7 @@ var APP =
                         + '<th>nome</th>'
                         + '<th>Necessita Piante</th>'
                         + '<th>Costo Per Ora</th>'
+                        + '<th>Richiedi Attività</th>'
                         + '</tr>';
                 for (i = 0; i < dettagliAttivita.length; i++) {
                     var id = dettagliAttivita[i].id;
@@ -79,6 +80,7 @@ var APP =
                             + '<td>' + descriione + '</td>'
                             + '<td>' + stagioneFioritura + '</td>'
                             + '<td>' + costoPerOra + '</td>'
+                            + '<td>' + '<input type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
                             + '</tr>';
                 }
                 document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
@@ -91,11 +93,11 @@ var APP =
                 var nome = $("#nome").val();
                 
                 var username = $("#username").val();
-                
+
                 var password = $("#password").val();
-                
+
                 var telefono = $("#telefono").val();
-                
+
                 $.ajax(
                         {
                             url: "http://localhost:8080/clienti",
@@ -122,8 +124,18 @@ var APP =
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
-                var url = "http://localhost:8080/clienti?username="+username+"&password="+password;
-                
+                var url = "http://localhost:8080/clienti?username=" + username + "&password=" + password;
+
+                if (username === "") {
+                    window.alert("il campo USERNAME non può essere vuoto!");
+                }
+                ;
+
+                if (password === "") {
+                    window.alert("il campo PASSWORD non può essere vuoto!");
+                }
+                ;
+
                 $.ajax(
                         {
                             url: url,
@@ -131,36 +143,88 @@ var APP =
                             success: function (data, status) {
                             },
                             statusCode: {
-                                200: function (){
+                                200: function () {
+                                    location.assign("cliente.html");
+                                }
+                            }
+                        }
+                );
+
+            },
+
+            getDipendenteByUsernameByPassword: function ()
+            {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var url = "http://localhost:8080/dipendenti?username=" + username + "&password=" + password;
+
+                $.ajax(
+                        {
+                            url: url,
+                            method: "GET",
+                            success: function (data, status) {
+                            },
+                            statusCode: {
+                                200: function () {
                                     location.assign("index.html");
                                 }
                             }
                         }
                 );
             },
-
-
-            getDipendenteByUsernameByPassword: function ()
+            getAttivitaNonSeguite: function ()
             {
-                var username = $("#username").val();
-                var password = $("#password").val();
-                var url = "http://localhost:8080/dipendenti?username="+username+"&password="+password;
-                
+                var url = "http://localhost:8080/attivita?seguito=false";
+
                 $.ajax(
                         {
                             url: url,
                             method: "GET",
                             success: function (data, status) {
-                            },
-                            statusCode: {
-                                200: function (){
-                                    location.assign("index.html");
-                                }
+                                APP.showAttivitaNonSeguite(data);
                             }
+ 
                         }
                 );
-            }
 
+            },
+            showAttivitaNonSeguite: function (attivitaNonSeguite)
+            {
+                var tabellaAttivitaNonEseguite = '<tr>'
+                        + '<th>id</th>'
+                        + '<th>Data di prenotazione</th>'
+                        + '<th>Data di effettuazione</th>'
+                        + '<th>Evaso</th>'
+                        + '<th>Cliente</th>'
+                        + '<th>Nome attivita</th>'
+                        + '<th>Costo orario</th>'
+                        + '<th>Necessita piante</th>'
+                        + '<th>Tipo</th>'
+                        + '</tr>';
+                for (i = 0; i < attivitaNonSeguite.length; i++) {
 
+                    var id = attivitaNonSeguite[i].id;
+                    var dataPrenotazione = attivitaNonSeguite[i].dataPrenotazione;
+                    var dataEffettuazione = attivitaNonSeguite[i].dataEffettuazione;
+                    var evaso = attivitaNonSeguite[i].evaso;
+                    var cliente = attivitaNonSeguite[i].cliente.username;
+                    var nomeAttivita = attivitaNonSeguite[i].dettagliAttivita.nome;
+                    var costoOrario = attivitaNonSeguite[i].dettagliAttivita.costoPerOra;
+                    var necessitaPiante = attivitaNonSeguite[i].dettagliAttivita.necessitaPiante;
+                    var tipo = attivitaNonSeguite[i].dettagliAttivita.tipo;
 
+                    tabellaAttivitaNonEseguite += '<tr>'
+                            + '<td>' + id + '</td>'
+                            + '<td>' + dataPrenotazione + '</td>'
+                            + '<td>' + dataEffettuazione + '</td>'
+                            + '<td>' + evaso + '</td>'
+                            + '<td>' + cliente + '</td>'
+                            + '<td>' + nomeAttivita + '</td>'
+                            + '<td>' + costoOrario + '</td>'
+                            + '<td>' + necessitaPiante + '</td>'
+                            + '<td>' + tipo + '</td>'
+                            + '</tr>';
+                }
+                document.getElementById("attivitaNonSeguite").innerHTML = tabellaAttivitaNonEseguite;
+            },
         };

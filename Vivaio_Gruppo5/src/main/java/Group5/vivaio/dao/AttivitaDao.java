@@ -6,6 +6,8 @@
 package Group5.vivaio.dao;
 
 import Group5.vivaio.entities.Attivita;
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 
@@ -15,5 +17,12 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface AttivitaDao extends CrudRepository<Attivita, Long>
 {
-    
+
+    @Query(value = "SELECT * FROM attivita a WHERE a.dipendente_id IS NOT NULL",
+            nativeQuery = true)
+    List<Attivita> findAllAttivitaSeguite();
+
+    @Query(value = "SELECT * FROM attivita a WHERE a.dipendente_id IS NULL",
+            nativeQuery = true)
+    List<Attivita> findAllAttivitaNonSeguite();
 }

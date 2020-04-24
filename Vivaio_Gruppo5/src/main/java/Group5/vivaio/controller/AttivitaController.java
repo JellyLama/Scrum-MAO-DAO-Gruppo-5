@@ -8,7 +8,9 @@ package Group5.vivaio.controller;
 import Group5.vivaio.dao.AttivitaDao;
 import Group5.vivaio.entities.Attivita;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -41,6 +44,14 @@ public class AttivitaController
     public Attivita get( @PathVariable Long id )
     {
         return attivitaDao.findById(id).get();
+    }
+    
+    @GetMapping(params ={"seguito"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Attivita> checkSeguitoAttivita(HttpServletRequest request, @RequestParam("seguito") boolean seguito){
+        if(seguito)
+            return attivitaDao.findAllAttivitaSeguite();
+        else
+            return attivitaDao.findAllAttivitaNonSeguite();
     }
 
     @PostMapping
