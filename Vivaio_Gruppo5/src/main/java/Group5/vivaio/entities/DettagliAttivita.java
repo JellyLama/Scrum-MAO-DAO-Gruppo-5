@@ -41,4 +41,6 @@ public class DettagliAttivita implements Serializable
     
     @Basic
     private float costoPerOra;
+    
+    
 }

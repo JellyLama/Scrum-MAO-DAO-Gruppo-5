@@ -67,6 +67,7 @@ var APP =
                         + '<th>nome</th>'
                         + '<th>Necessita Piante</th>'
                         + '<th>Costo Per Ora</th>'
+                        + '<th>Richiedi Attività</th>'
                         + '</tr>';
                 for (i = 0; i < dettagliAttivita.length; i++) {
                     var id = dettagliAttivita[i].id;
@@ -79,6 +80,7 @@ var APP =
                             + '<td>' + descriione + '</td>'
                             + '<td>' + stagioneFioritura + '</td>'
                             + '<td>' + costoPerOra + '</td>'
+                            + '<td>' + '<input type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
                             + '</tr>';
                 }
                 document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
@@ -137,7 +139,7 @@ var APP =
                             },
                             statusCode: {
                                 200: function (){
-                                    location.assign("index.html");
+                                    location.assign("cliente.html");
                                 }
                             }
                         }
@@ -166,7 +168,4 @@ var APP =
                         }
                 );
             }
-
-
-
         };
