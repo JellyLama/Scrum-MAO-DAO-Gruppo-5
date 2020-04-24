@@ -86,7 +86,10 @@ var APP =
 
             insertCliente: function ()
             {
-
+                var cognome = $("#cognome").val();
+                
+                var nome = $("#nome").val();
+                
                 var username = $("#username").val();
                 
                 var password = $("#password").val();

@@ -14,23 +14,25 @@ and open the template in the editor.
         <script src="APP.js"></script>
     </head>
     <body>
-        <h1> Registrazione </h1>
-        <label for="fname">Cognome:</label><br>
-        <input type="text" id="cognome" name="fname" placeholder="Bachir"><br>
-        <label for="lname">Nome:</label><br>
-        <input type="text" id="nome" name="lname" placeholder="Karim"><br>
-        <label for="lname">Username:</label><br>
-        <input type="text" id="username" name="username" placeholder="Username"><br>
-        <label for="lname">Password:</label><br>
-        <input type="password" id="password" name="password" placeholder="Password"><br>
-        <label for="telephone">Telefono:</label><br>
-        <input type="text" id="telefono" name="telefono" placeholder="312 3453213"><br>
-        <input type="submit" id="registrati" value="Registrati">
+        <div class="form"><br>
+        <h1> Registrazione </h1><br>
+        <label for="fname">Cognome</label><br>
+        <input type="text" id="cognome" name="fname" placeholder="Bachir"><br><br>
+        <label for="lname">Nome</label><br>
+        <input type="text" id="nome" name="lname" placeholder="Karim"><br><br>
+        <label for="lname">Username</label><br>
+        <input type="text" id="username" name="username" placeholder="Username"><br><br>
+        <label for="lname">Password</label><br>
+        <input type="password" id="password" name="password" placeholder="Password"><br><br>
+        <label for="telephone">Telefono</label><br>
+        <input type="text" id="telefono" name="telefono" placeholder="312 3453213"><br><br><br>
+        <input type="submit" id="registrati" value="Registrati"><br><br><br><br>
         <script>
             //init APP
             $(document).ready(function () {
                 $("#registrati").on("click", APP.insertCliente);
             });
         </script>
+        </div>
     </body>
 </html>

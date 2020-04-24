@@ -7,3 +7,49 @@ and open the template in the editor.
     Created on : 24-apr-2020, 15.09.50
     Author     : jpoll
 */
+
+
+body{
+    background-image:url(./img/vivaio.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align: center;
+    margin-left: 40%; 
+    margin-right: 40%; 
+    margin-top: 10%; 
+    color: #ff33bb; 
+        
+        
+
+}
+
+.form{
+    background-color: white;
+    border: 4px solid #ff33bb;
+    
+}
+
+
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white; 
+    border: 2px solid #ff33bb;
+}
+
+.button1:hover {
+    background-color: #ff33bb;
+    color: white;
+}

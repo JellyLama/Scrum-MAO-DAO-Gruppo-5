@@ -7,25 +7,28 @@ and open the template in the editor.
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>TODO supply a title</title>
+        <title>Vivaio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="APP.js"></script>
     </head>
+    
     <body>
-        <h1> Login Cliente </h1>
+        <div class="form"><br>
+        <h1> Login Cliente </h1><br>
   
         <label for="cognome">Username</label><br>
-        <input type="text" id="username" name="username" placeholder="Sfinge69"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" placeholder="Password"><br><br>
-        <input type="submit" value="Submit" id="submit">
+        <input type="text" id="username" name="username" placeholder="Sfinge69"><br><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" placeholder="Password"><br><br><br>
+        <input class="button button1" type="submit" value="Submit" id="submit"><br><br><br><br>
         <script>
             //init APP
             $(document).ready(function () {
                 $("#submit").on("click", APP.getClienteByUsernameByPassword);
             });
         </script>
+        </div>
     </body>
 </html>
