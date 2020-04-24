@@ -59,9 +59,9 @@ public class ClienteController
         clienteDao.deleteById(id);
     }
     
-    @GetMapping(params ={ "nome", "cognome", "password"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cliente findClienteByNomeCognomePassword(HttpServletRequest request, @RequestParam("nome") String nome, @RequestParam("cognome") String cognome, @RequestParam("password") String password){
-        return clienteDao.findByNomeAndCognomeAndPassword(nome, cognome, password).get();
+    @GetMapping(params ={"username", "password"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Cliente findClienteByUsernamePassword(HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password){
+        return clienteDao.findByUsernameAndPassword(username, password).get();
     }
 
 }

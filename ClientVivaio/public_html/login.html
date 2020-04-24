@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +16,15 @@ and open the template in the editor.
     <body>
         <h1> Login </h1>
   
-        <label for="cognome">Cognome:</label><br>
-        <input type="text" id="cognome" name="cognome" placeholder="Bachir"><br>
-        <label for="nome">Nome:</label><br>
-        <input type="text" id="nome" name="nome" placeholder="Karim"><br><br>
+        <label for="cognome">Username</label><br>
+        <input type="text" id="username" name="username" placeholder="Sfinge69"><br>
         <label for="password">Password:</label><br>
         <input type="text" id="password" name="password" placeholder="Password"><br><br>
         <input type="submit" value="Submit" id="submit">
         <script>
             //init APP
             $(document).ready(function () {
-                $("#submit").on("click", APP.getUtenteByNomeByCognomeByPassword);
+                $("#submit").on("click", APP.getUtenteByUsernameByPassword);
             });
         </script>
     </body>
