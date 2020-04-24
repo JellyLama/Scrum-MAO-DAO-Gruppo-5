@@ -91,6 +91,9 @@ var APP =
                 ;
                 var nome = $("#nome").val();
                 ;
+                
+                var username = $("#username").val();
+                ;
                 var password = $("#password").val();
                 ;
                 var telefono = $("#telefono").val();
@@ -104,6 +107,7 @@ var APP =
                                     {
                                         cognome: cognome,
                                         nome: nome,
+                                        username: username,
                                         password: password,
                                         telefono: telefono
 
@@ -116,12 +120,11 @@ var APP =
                         }
                 );
             },
-            getUtenteByNomeByCognomeByPassword: function ()
+            getUtenteByUsernameByPassword: function ()
             {
-                var nome = $("#nome").val();
-                var cognome = $("#cognome").val();
+                var username = $("#username").val();
                 var password = $("#password").val();
-                var url = "http://localhost:8080/clienti?nome="+nome+"&cognome="+cognome+"&password="+password;
+                var url = "http://localhost:8080/clienti?username="+username+"&password="+password;
                 
                 $.ajax(
                         {

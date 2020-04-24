@@ -15,6 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Bachir_Karim
  */
 public interface ClienteDao extends CrudRepository<Cliente, Long>{
-    Optional<Cliente> findByNomeAndCognomeAndPassword(String nome, String cognome, String password);
+    Optional<Cliente> findByUsernameAndPassword(String username, String password);
     
 }
