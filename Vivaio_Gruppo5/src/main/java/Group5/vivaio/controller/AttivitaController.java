@@ -47,7 +47,7 @@ public class AttivitaController
     }
     
     @GetMapping(params ={"seguito"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Attivita> findAttivitaNonEvase(HttpServletRequest request, @RequestParam("seguito") boolean seguito){
+    public List<Attivita> checkSeguitoAttivita(HttpServletRequest request, @RequestParam("seguito") boolean seguito){
         if(seguito)
             return attivitaDao.findAllAttivitaSeguite();
         else
