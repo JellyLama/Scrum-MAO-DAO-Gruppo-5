@@ -53,6 +53,14 @@ public class AttivitaController
         else
             return attivitaDao.findAllAttivitaNonSeguite();
     }
+    
+    @GetMapping(params ={"evaso"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Attivita> checkEvasoAttivita(HttpServletRequest request, @RequestParam("evaso") boolean evaso){
+        if(evaso)
+            return attivitaDao.findAllAttivitaEvase();
+        else
+            return attivitaDao.findAllAttivitaNonEvase();
+    }
 
     @PostMapping
     public void post( @RequestBody Attivita a )
