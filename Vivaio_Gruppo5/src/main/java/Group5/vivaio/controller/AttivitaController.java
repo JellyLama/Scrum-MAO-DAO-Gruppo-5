@@ -46,9 +46,12 @@ public class AttivitaController
         return attivitaDao.findById(id).get();
     }
     
-    @GetMapping(params ={"evaso"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Attivita> findAttivitaNonEvase(HttpServletRequest request, @RequestParam("evaso") boolean evaso){
-        return attivitaDao.findByEvaso(evaso);
+    @GetMapping(params ={"seguito"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Attivita> findAttivitaNonEvase(HttpServletRequest request, @RequestParam("seguito") boolean seguito){
+        if(seguito)
+            return attivitaDao.findAllAttivitaSeguite();
+        else
+            return attivitaDao.findAllAttivitaNonSeguite();
     }
 
     @PostMapping
