@@ -115,7 +115,7 @@ var APP =
                         }
                 );
             },
-            getUtenteByUsernameByPassword: function ()
+            getClienteByUsernameByPassword: function ()
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
