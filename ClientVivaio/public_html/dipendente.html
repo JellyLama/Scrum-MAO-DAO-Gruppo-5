@@ -9,9 +9,23 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="APP.js"></script>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
         <h1> Benvenuto dipendente </h1>
-        
+        <table id='attivitaNonSeguite'>
+        </table>
+        <script>
+            //init APP
+            $(document).ready(function () {
+                APP.getAttivitaNonSeguite();
+            });
+        </script>
     </body>
 </html>
