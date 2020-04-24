@@ -8,7 +8,9 @@ package Group5.vivaio.controller;
 import Group5.vivaio.dao.DipendenteDao;
 import Group5.vivaio.entities.Dipendente;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -55,4 +58,8 @@ public class DipendenteController
         dipendenteDao.deleteById(id);
     }
     
+    @GetMapping(params ={"username", "password"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dipendente findDipendenteByUsernamePassword(HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password){
+        return dipendenteDao.findByUsernameAndPassword(username, password).get();
+    }
 }

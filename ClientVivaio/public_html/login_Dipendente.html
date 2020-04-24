@@ -14,17 +14,17 @@ and open the template in the editor.
         <script src="APP.js"></script>
     </head>
     <body>
-        <h1> Login </h1>
+        <h1> Login Dipendente </h1>
   
         <label for="cognome">Username</label><br>
         <input type="text" id="username" name="username" placeholder="Sfinge69"><br>
         <label for="password">Password:</label><br>
-        <input type="text" id="password" name="password" placeholder="Password"><br><br>
+        <input type="password" id="password" name="password" placeholder="Password"><br><br>
         <input type="submit" value="Submit" id="submit">
         <script>
             //init APP
             $(document).ready(function () {
-                $("#submit").on("click", APP.getUtenteByUsernameByPassword);
+                $("#submit").on("click", APP.getDipendenteByUsernameByPassword);
             });
         </script>
     </body>
