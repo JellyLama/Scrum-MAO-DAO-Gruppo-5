@@ -14,14 +14,24 @@
         <script src="APP.js"></script>
     </head>
     <body>
-        <h1>Attività</h1>
+        <h1>Attività da prenotare</h1>
         <table id='dettagliAttivita'>
-        </table>
+        </table><br><br>
 
         <script>
             //init APP
             $(document).ready(function () {
                 APP.getDettagliAttivita();
+            });
+        </script>
+        
+        <h1>Attività svolte</h1>
+        <table id="attivitaEvase">
+        </table>
+        <script>
+            //init APP
+            $(document).ready(function () {
+                APP.getAttivitaEvase();
             });
         </script>
     </body>

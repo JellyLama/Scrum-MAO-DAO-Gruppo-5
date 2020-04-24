@@ -227,4 +227,115 @@ var APP =
                 }
                 document.getElementById("attivitaNonSeguite").innerHTML = tabellaAttivitaNonEseguite;
             },
+            getAttivitaNonEvase: function ()
+            {
+                var url = "http://localhost:8080/attivita?evaso=false";
+
+                $.ajax(
+                        {
+                            url: url,
+                            method: "GET",
+                            success: function (data, status) {
+                                APP.showAttivitaNonEvase(data);
+                            }
+ 
+                        }
+                );
+
+            },
+            showAttivitaNonEvase: function (attivitaNonEvase)
+            {
+                var tabellaAttivitaNonEvase = '<tr>'
+                        + '<th>id</th>'
+                        + '<th>Data di prenotazione</th>'
+                        + '<th>Data di effettuazione</th>'
+                        + '<th>Evaso</th>'
+                        + '<th>Cliente</th>'
+                        + '<th>Nome attivita</th>'
+                        + '<th>Costo orario</th>'
+                        + '<th>Necessita piante</th>'
+                        + '<th>Tipo</th>'
+                        + '</tr>';
+                for (i = 0; i < attivitaNonEvase.length; i++) {
+
+                    var id = attivitaNonEvase[i].id;
+                    var dataPrenotazione = attivitaNonEvase[i].dataPrenotazione;
+                    var dataEffettuazione = attivitaNonEvase[i].dataEffettuazione;
+                    var evaso = attivitaNonEvase[i].evaso;
+                    var cliente = attivitaNonEvase[i].cliente.username;
+                    var nomeAttivita = attivitaNonEvase[i].dettagliAttivita.nome;
+                    var costoOrario = attivitaNonEvase[i].dettagliAttivita.costoPerOra;
+                    var necessitaPiante = attivitaNonEvase[i].dettagliAttivita.necessitaPiante;
+                    var tipo = attivitaNonEvase[i].dettagliAttivita.tipo;
+
+                    tabellaAttivitaNonEvase += '<tr>'
+                            + '<td>' + id + '</td>'
+                            + '<td>' + dataPrenotazione + '</td>'
+                            + '<td>' + dataEffettuazione + '</td>'
+                            + '<td>' + evaso + '</td>'
+                            + '<td>' + cliente + '</td>'
+                            + '<td>' + nomeAttivita + '</td>'
+                            + '<td>' + costoOrario + '</td>'
+                            + '<td>' + necessitaPiante + '</td>'
+                            + '<td>' + tipo + '</td>'
+                            + '</tr>';
+                }
+  //             document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
+            },
+            getAttivitaEvase: function ()
+            {
+                var url = "http://localhost:8080/attivita?evaso=true";
+
+                $.ajax(
+                        {
+                            url: url,
+                            method: "GET",
+                            success: function (data, status) {
+                                APP.showAttivitaEvase(data);
+                            }
+ 
+                        }
+                );
+
+            },
+            showAttivitaEvase: function (attivitaEvase)
+            {
+                var tabellaAttivitaEvase = '<tr>'
+                        + '<th>id</th>'
+                        + '<th>Data di prenotazione</th>'
+                        + '<th>Data di effettuazione</th>'
+                        + '<th>Evaso</th>'
+                        + '<th>Cliente</th>'
+                        + '<th>Nome attivita</th>'
+                        + '<th>Costo orario</th>'
+                        + '<th>Necessita piante</th>'
+                        + '<th>Tipo</th>'
+                        + '</tr>';
+                for (i = 0; i < attivitaEvase.length; i++) {
+
+                    var id = attivitaEvase[i].id;
+                    var dataPrenotazione = attivitaEvase[i].dataPrenotazione;
+                    var dataEffettuazione = attivitaEvase[i].dataEffettuazione;
+                    var evaso = attivitaEvase[i].evaso;
+                    var cliente = attivitaEvase[i].cliente.username;
+                    var nomeAttivita = attivitaEvase[i].dettagliAttivita.nome;
+                    var costoOrario = attivitaEvase[i].dettagliAttivita.costoPerOra;
+                    var necessitaPiante = attivitaEvase[i].dettagliAttivita.necessitaPiante;
+                    var tipo = attivitaEvase[i].dettagliAttivita.tipo;
+
+                    tabellaAttivitaEvase += '<tr>'
+                            + '<td>' + id + '</td>'
+                            + '<td>' + dataPrenotazione + '</td>'
+                            + '<td>' + dataEffettuazione + '</td>'
+                            + '<td>' + evaso + '</td>'
+                            + '<td>' + cliente + '</td>'
+                            + '<td>' + nomeAttivita + '</td>'
+                            + '<td>' + costoOrario + '</td>'
+                            + '<td>' + necessitaPiante + '</td>'
+                            + '<td>' + tipo + '</td>'
+                            + '</tr>';
+                }
+                document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;
+            },
+            
         };
