@@ -6,6 +6,7 @@
 package Group5.vivaio.dao;
 
 import Group5.vivaio.entities.Attivita;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 
@@ -15,5 +16,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface AttivitaDao extends CrudRepository<Attivita, Long>
 {
-    
+    List<Attivita> findByEvaso(boolean evaso);
 }
