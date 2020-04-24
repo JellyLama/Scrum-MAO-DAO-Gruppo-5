@@ -121,6 +121,14 @@ var APP =
                 var password = $("#password").val();
                 var url = "http://localhost:8080/clienti?username="+username+"&password="+password;
                 
+                if (username === ""){
+                    window.alert("il campo USERNAME non può essere vuoto!");
+                };
+                
+                if (password === ""){
+                    window.alert("il campo PASSWORD non può essere vuoto!");
+                };
+                
                 $.ajax(
                         {
                             url: url,
@@ -135,8 +143,4 @@ var APP =
                         }
                 );
             }
-
-
-
-
         };
