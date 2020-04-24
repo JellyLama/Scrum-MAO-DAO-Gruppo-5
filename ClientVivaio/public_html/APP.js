@@ -88,13 +88,13 @@ var APP =
             {
 
                 var cognome = $("#cognome").val();
-                ;
+                
                 var nome = $("#nome").val();
-                ;
+                
                 var password = $("#password").val();
-                ;
+                
                 var telefono = $("#telefono").val();
-                ;
+                
                 $.ajax(
                         {
                             url: "http://localhost:8080/clienti",
@@ -141,4 +141,4 @@ var APP =
 
 
 
-        }
+        };
