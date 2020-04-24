@@ -17,13 +17,13 @@ var APP =
             showPiante: function (piante)
             {
                 var tabellaPiante = '<tr>'
-                        + '<th>nome</th>'
-                        + '<th>descrizione</th>'
-                        + '<th>stagione di fioritura</th>'
-                        + '<th>specie</th>'
-                        + '<th>modo di coltivazione</th>'
-                        + '<th>tipo</th>'
-                        + '<th>prezzo</th>'
+                        + '<th>Nome</th>'
+                        + '<th>Descrizione</th>'
+                        + '<th>Stagione di Fioritura</th>'
+                        + '<th>Specie</th>'
+                        + '<th>Coltivazione</th>'
+                        + '<th>Tipo</th>'
+                        + '<th>Prezzo</th>'
                         + '</tr>';
                 for (i = 0; i < piante.length; i++) {
                     var id = piante[i].id;
@@ -63,24 +63,24 @@ var APP =
             showDettagliAttivita: function (dettagliAttivita)
             {
                 var tabellaDettagliAttivita = '<tr>'
-                        + '<th>tipo</th>'
-                        + '<th>nome</th>'
+                        + '<th>Tipo</th>'
+                        + '<th>Nome</th>'
                         + '<th>Necessita Piante</th>'
-                        + '<th>Costo Per Ora</th>'
+                        + '<th>Costo per Ora</th>'
                         + '<th>Richiedi Attività</th>'
                         + '</tr>';
                 for (i = 0; i < dettagliAttivita.length; i++) {
                     var id = dettagliAttivita[i].id;
                     var nome = dettagliAttivita[i].tipo;
-                    var descriione = dettagliAttivita[i].nome;
+                    var descrizione = dettagliAttivita[i].nome;
                     var stagioneFioritura = dettagliAttivita[i].necessitaPiante;
                     var costoPerOra = dettagliAttivita[i].costoPerOra;
                     tabellaDettagliAttivita += '<tr>'
                             + '<td>' + nome + '</td>'
-                            + '<td>' + descriione + '</td>'
+                            + '<td>' + descrizione + '</td>'
                             + '<td>' + stagioneFioritura + '</td>'
                             + '<td>' + costoPerOra + '</td>'
-                            + '<td>' + '<input type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
+                            + '<td>' + '<input class="button button1"type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
                             + '</tr>';
                 }
                 document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;

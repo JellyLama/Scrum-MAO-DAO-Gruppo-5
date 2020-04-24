@@ -2,18 +2,48 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
-        <title>TODO supply a title</title>
+        <title>Vivaio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            table, th, td {
-                border: 1px solid black;
+            table, td, th {
+                border: 2px solid #ff33bb;
+                color: #ff33bb;
+                margin-top: 10%;
+                margin-left: 8%;
+                margin-bottom: 10%;
+            }
+
+            table {
+                border-collapse: collapse;
+                
+            }
+
+            th {
+                text-align: center;
+            }
+
+            body{
+
+                background-image:url(./img/vivaio.jpg);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                text-align: center;
+                margin-left: 28%; 
+                margin-right: 27%; 
+                margin-top: 10%; 
+                color: #ff33bb; 
+
+
+
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="APP.js"></script>
     </head>
     <body>
+        <div class="form"><br>
         <h1>Attività da prenotare</h1>
         <table id='dettagliAttivita'>
         </table><br><br>
@@ -34,5 +64,6 @@
                 APP.getAttivitaEvase();
             });
         </script>
+        </div>
     </body>
 </html>
