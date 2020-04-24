@@ -6,6 +6,7 @@
 package Group5.vivaio.dao;
 
 import Group5.vivaio.entities.Dipendente;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 
@@ -13,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Bachir_Karim
  */
-public interface DipendenteDao extends CrudRepository<Dipendente, Long>
-{
+public interface DipendenteDao extends CrudRepository<Dipendente, Long>{
+    Optional<Dipendente> findByUsernameAndPassword(String username, String password);
     
 }

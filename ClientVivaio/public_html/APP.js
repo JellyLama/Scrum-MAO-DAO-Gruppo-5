@@ -120,7 +120,7 @@ var APP =
                         }
                 );
             },
-            getUtenteByUsernameByPassword: function ()
+            getClienteByUsernameByPassword: function ()
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
@@ -139,8 +139,29 @@ var APP =
                             }
                         }
                 );
-            }
+            },
 
+
+            getDipendenteByUsernameByPassword: function ()
+            {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var url = "http://localhost:8080/dipendenti?username="+username+"&password="+password;
+                
+                $.ajax(
+                        {
+                            url: url,
+                            method: "GET",
+                            success: function (data, status) {
+                            },
+                            statusCode: {
+                                200: function (){
+                                    location.assign("index.html");
+                                }
+                            }
+                        }
+                );
+            }
 
 
 
