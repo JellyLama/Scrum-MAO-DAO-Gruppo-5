@@ -191,7 +191,7 @@ var APP =
                             },
                             statusCode: {
                                 200: function () {
-                                    location.assign("index.html");
+                                    location.assign("dipendente.html");
                                 }
                             }
                         }
@@ -361,6 +361,6 @@ var APP =
                             + '</tr>';
                 }
                 document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;
-            },
+            }
 
         };
