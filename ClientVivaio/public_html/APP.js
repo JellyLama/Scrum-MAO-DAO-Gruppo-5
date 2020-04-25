@@ -89,13 +89,9 @@ var APP =
             insertCliente: function ()
             {
                 var cognome = $("#cognome").val();
-                
-                var nome = $("#nome").val();
-                
+                var nome = $("#nome").val();               
                 var username = $("#username").val();
-
                 var password = $("#password").val();
-
                 var telefono = $("#telefono").val();
 
                 $.ajax(
@@ -114,8 +110,11 @@ var APP =
                                     }
                             ),
                             success: function (data, status) {
-
-
+                            },
+                            statusCode: {
+                                200: function () {
+                                    location.assign("cliente.html");
+                                }
                             }
                         }
                 );
