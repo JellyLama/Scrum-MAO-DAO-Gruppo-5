@@ -322,7 +322,7 @@ var APP =
                             + '<td>' + tipo + '</td>'
                             + '</tr>';
                 }
-                //             document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
+                document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
             },
             getAttivitaEvase: function ()
             {
