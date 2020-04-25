@@ -1,5 +1,11 @@
 var APP =
         {
+            setCookie: function (cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            },
             getPiante: function ()
             {
 //gets all post from API
@@ -119,48 +125,44 @@ var APP =
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var telefono = $("#telefono").val();
-                
-                if (cognome === "") {
-                window.alert("il campo COGNOME non può essere vuoto!");
-                }
-                else if (nome === "") {
-                window.alert("il campo NOME non può essere vuoto!");
-                }
-                else if (username === "") {
-                window.alert("il campo USERNAME non può essere vuoto!");
-                }
-                else if (password === "") {
-                window.alert("il campo PASSWORD non può essere vuoto!");
-                }
-                else if (telefono === "") {
-                window.alert("il campo TELEFONO non può essere vuoto!");
-            }
-            else{
-                $.ajax(
-                        {
-                            url: "http://localhost:8080/clienti",
-                            method: "POST",
-                            contentType: "application/json",
-                            data: JSON.stringify(
-                                    {
-                                        cognome: cognome,
-                                        nome: nome,
-                                        username: username,
-                                        password: password,
-                                        telefono: telefono
 
+                if (cognome === "") {
+                    window.alert("il campo COGNOME non può essere vuoto!");
+                } else if (nome === "") {
+                    window.alert("il campo NOME non può essere vuoto!");
+                } else if (username === "") {
+                    window.alert("il campo USERNAME non può essere vuoto!");
+                } else if (password === "") {
+                    window.alert("il campo PASSWORD non può essere vuoto!");
+                } else if (telefono === "") {
+                    window.alert("il campo TELEFONO non può essere vuoto!");
+                } else {
+                    $.ajax(
+                            {
+                                url: "http://localhost:8080/clienti",
+                                method: "POST",
+                                contentType: "application/json",
+                                data: JSON.stringify(
+                                        {
+                                            cognome: cognome,
+                                            nome: nome,
+                                            username: username,
+                                            password: password,
+                                            telefono: telefono
+
+                                        }
+                                ),
+                                success: function (data, status) {
+                                },
+                                statusCode: {
+                                    200: function () {
+                                        location.assign("cliente.html");
                                     }
-                            ),
-                            success: function (data, status) {
-                            },
-                            statusCode: {
-                                200: function () {
-                                    location.assign("cliente.html");
                                 }
                             }
-                        }
-                );
-            };
+                    );
+                }
+                ;
             },
             getClienteByUsernameByPassword: function ()
             {
@@ -170,28 +172,25 @@ var APP =
 
                 if (username === "") {
                     window.alert("il campo USERNAME non può essere vuoto!");
-                }
-                ;
-
-                if (password === "") {
+                } else if (password === "") {
                     window.alert("il campo PASSWORD non può essere vuoto!");
-                }
-                ;
-
-                $.ajax(
-                        {
-                            url: url,
-                            method: "GET",
-                            success: function (data, status) {
-                            },
-                            statusCode: {
-                                200: function () {
-                                    location.assign("cliente.html");
+                } else {
+                    $.ajax(
+                            {
+                                url: url,
+                                method: "GET",
+                                success: function (utente) {
+                                },
+                                statusCode: {
+                                    200: function (utente) {
+                                        APP.setCookie("idCliente", utente.id, 1);
+                                        location.assign("cliente.html");
+                                    }
                                 }
                             }
-                        }
-                );
+                    );
 
+                }
             },
 
             getDipendenteByUsernameByPassword: function ()
@@ -378,6 +377,6 @@ var APP =
                             + '</tr>';
                 }
                 document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;
-            }
+            },
 
         };
