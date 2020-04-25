@@ -16,7 +16,7 @@
 
             table {
                 border-collapse: collapse;
-                
+
             }
 
             th {
@@ -44,36 +44,26 @@
     </head>
     <body>
         <div class="form"><br>
-        <h1>Attività da prenotare</h1>
-        <table id='dettagliAttivita'>
-        </table><br><br>
+            <h1>Attività da prenotare</h1>
+            <table id='dettagliAttivita'>
+            </table><br><br>
 
-        <script>
-            //init APP
-            $(document).ready(function () {
-                APP.getDettagliAttivita();
-            });
-        </script>
-        
-        <h1>Attività svolte</h1>
-        <table id="attivitaEvase">
-        </table>
-        <script>
-            //init APP
-            $(document).ready(function () {
-                APP.getAttivitaEvase();
-            });
-        </script>
-        
-        <h1>Attività NON ancora svolte </h1>
+            <h1>Attività svolte</h1>
+            <table id="attivitaEvase">
+            </table>
+
+            <h1>Attività NON ancora svolte </h1>
             <table id="attivitaNonEvase">
             </table>
-        <script>
-            //init APP
-            $(document).ready(function () {
-                APP.getAttivitaNonEvase();
-            });
-        </script>
+
+            <script>
+                //init APP
+                $(document).ready(function () {
+                    APP.getDettagliAttivita();
+                    APP.getAttivitaNonEvase();
+                    APP.getAttivitaEvase();
+                });
+            </script>
         </div>
     </body>
 </html>
