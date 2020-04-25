@@ -119,6 +119,22 @@ var APP =
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var telefono = $("#telefono").val();
+                
+                if (cognome === "") {
+                window.alert("il campo COGNOME non può essere vuoto!");
+                }
+                else if (nome === "") {
+                window.alert("il campo NOME non può essere vuoto!");
+                }
+                else if (username === "") {
+                window.alert("il campo USERNAME non può essere vuoto!");
+                }
+                else if (password === "") {
+                window.alert("il campo PASSWORD non può essere vuoto!");
+                }
+                else if (telefono === "") {
+                window.alert("il campo TELEFONO non può essere vuoto!");
+                
 
                 $.ajax(
                         {
@@ -144,6 +160,7 @@ var APP =
                             }
                         }
                 );
+            };
             },
             getClienteByUsernameByPassword: function ()
             {
