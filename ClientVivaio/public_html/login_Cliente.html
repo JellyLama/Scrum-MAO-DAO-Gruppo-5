@@ -13,25 +13,28 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="APP.js"></script>
     </head>
-    
+
     <body>
         <div class="home_button">
-            <a class="button button1" href="index.html">Home</a><br>        
+            <a href="index.html">
+            <img alt="" src="img/home.png">
+        </a>        
         </div>
+        
         <div class="form"><br>
-        <h1> Login Cliente </h1><br>
-  
-        <label for="cognome">Username</label><br>
-        <input type="text" id="username" name="username" placeholder="Username"><br><br>
-        <label for="password">Password</label><br>
-        <input type="password" id="password" name="password" placeholder="Password"><br><br><br>
-        <input class="button button1" type="submit" value="LOGIN" id="submit"><br><br><br><br>
-        <script>
-            //init APP
-            $(document).ready(function () {
-                $("#submit").on("click", APP.getClienteByUsernameByPassword);
-            });
-        </script>
+            <h1> Login Cliente </h1><br>
+
+            <label for="cognome">Username</label><br>
+            <input type="text" id="username" name="username" placeholder="Username"><br><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" placeholder="Password"><br><br><br>
+            <input class="button button1" type="submit" value="LOGIN" id="submit"><br><br><br><br>
+            <script>
+                //init APP
+                $(document).ready(function () {
+                    $("#submit").on("click", APP.getClienteByUsernameByPassword);
+                });
+            </script>
         </div>
     </body>
 </html>
