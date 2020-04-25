@@ -100,10 +100,15 @@ var APP = {
                         + '<td>' + descrizione + '</td>'
                         + '<td>' + stagioneFioritura + '</td>'
                         + '<td>' + costoPerOra + '</td>'
-                        + '<td>' + '<input class="button button1"type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
+                        + '<td>' + '<input class="buttonRichiediAttivita" type="submit" id="' + id + '" value="Richiedi Attività">' + '</td>'
                         + '</tr>';
             }
             document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
+            var buttonsRichiediAttivita = document.getElementsByClassName("buttonRichiediAttivita");
+            for (i = 0; i < buttonsRichiediAttivita.length; i++) {
+                var buttonId = buttonsRichiediAttivita[i].getAttribute("id");
+                $("#" + buttonId).on("click", APP.insertAttivita);
+            }
         } else
         {
             var tabellaDettagliAttivita = '<tr>'
@@ -161,10 +166,11 @@ var APP = {
 
                                 }
                         ),
-                        success: function (data, status) {
+                        success: function (utente, status) {
                         },
                         statusCode: {
-                            200: function () {
+                            200: function (utente) {
+                                APP.setCookie("idCliente", utente.id, 1);
                                 location.assign("cliente.html");
                             }
                         }
@@ -172,6 +178,57 @@ var APP = {
             );
         }
         ;
+    },
+    insertAttivita: function ()
+    {
+        var id = this.id;
+        var idCliente = APP.getCookie("idCliente");
+        var data = new Date();
+        var attivita = JSON.stringify(
+                {
+                    cliente: {id: idCliente},
+                    dettagliAttivita: {id: id},
+                    dataPrenotazione: data,
+                    evaso: false
+
+                });
+        $.ajax(
+                {
+                    url: "http://localhost:8080/attivita",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: attivita,
+                    success: function (data, status) {
+                    },
+                    statusCode: {
+                        200: function () {
+                            window.alert("Attività prenotata");
+                        }
+                    }
+                }
+        );
+
+        ;
+    },
+    getDettagliAttivitaById: function (id)
+    {
+
+        var url = "http://localhost:8080/dettagliattivita/" + id;
+
+        $.ajax(
+                {
+                    url: url,
+                    method: "GET",
+                    success: function (dettagliAttivita) {
+                    },
+                    statusCode: {
+                        200: function (dettagliAttivita) {
+                            return dettagliAttivita;
+                        }
+                    }
+                }
+        );
+
     },
     getClienteByUsernameByPassword: function ()
     {
@@ -294,6 +351,7 @@ var APP = {
                 + '<th>Costo orario</th>'
                 + '<th>Necessita piante</th>'
                 + '<th>Tipo</th>'
+                + '<th>Dipendente</th>'
                 + '</tr>';
         for (i = 0; i < attivitaNonEvase.length; i++) {
 
@@ -306,6 +364,15 @@ var APP = {
             var costoOrario = attivitaNonEvase[i].dettagliAttivita.costoPerOra;
             var necessitaPiante = attivitaNonEvase[i].dettagliAttivita.necessitaPiante;
             var tipo = attivitaNonEvase[i].dettagliAttivita.tipo;
+            var dipendente = attivitaNonEvase[i].dipendente;
+            if (dipendente === null)
+            {
+                var dipendente = "null";
+            } 
+            else
+            {
+                var dipendente = attivitaNonEvase[i].dipendente.cognome + " " + attivitaNonEvase[i].dipendente.nome;
+            }
             tabellaAttivitaNonEvase += '<tr>'
                     + '<td>' + id + '</td>'
                     + '<td>' + dataPrenotazione + '</td>'
@@ -316,6 +383,7 @@ var APP = {
                     + '<td>' + costoOrario + '</td>'
                     + '<td>' + necessitaPiante + '</td>'
                     + '<td>' + tipo + '</td>'
+                    + '<td>' + dipendente + '</td>'
                     + '</tr>';
         }
         document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
@@ -347,6 +415,7 @@ var APP = {
                 + '<th>Costo orario</th>'
                 + '<th>Necessita piante</th>'
                 + '<th>Tipo</th>'
+                + '<th>Dipendente</th>'
                 + '</tr>';
         for (i = 0; i < attivitaEvase.length; i++) {
 
@@ -359,6 +428,14 @@ var APP = {
             var costoOrario = attivitaEvase[i].dettagliAttivita.costoPerOra;
             var necessitaPiante = attivitaEvase[i].dettagliAttivita.necessitaPiante;
             var tipo = attivitaEvase[i].dettagliAttivita.tipo;
+            if (dipendente === null)
+            {
+                var dipendente = "null";
+            } 
+            else
+            {
+                var dipendente = attivitaEvase[i].dipendente.cognome + " " + attivitaEvase[i].dipendente.nome;
+            }
             tabellaAttivitaEvase += '<tr>'
                     + '<td>' + id + '</td>'
                     + '<td>' + dataPrenotazione + '</td>'
@@ -369,6 +446,7 @@ var APP = {
                     + '<td>' + costoOrario + '</td>'
                     + '<td>' + necessitaPiante + '</td>'
                     + '<td>' + tipo + '</td>'
+                    + '<td>' + dipendente + '</td>'
                     + '</tr>';
         }
         document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;

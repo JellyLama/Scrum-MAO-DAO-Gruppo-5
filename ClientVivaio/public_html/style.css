@@ -38,7 +38,7 @@ body{
 }
 
 
-.button {
+.buttonRichiediAttivita {
 
     color: #ff33bb;
     padding: 6px 12px;
@@ -50,14 +50,11 @@ body{
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 20px;
-}
-
-.button1 {
     background-color: white; 
     border: 2px solid #ff33bb;
 }
 
-.button1:hover {
+.buttonRichiediAttivita:hover {
     background-color: #ff33bb;
     color: white;
 }

@@ -48,9 +48,9 @@ public class ClienteController
     }
 
     @PostMapping()
-    public void addCliente(HttpServletRequest request, @RequestBody Cliente c)
+    public Cliente addCliente(HttpServletRequest request, @RequestBody Cliente c)
     {
-        clienteDao.save(c);
+        return clienteDao.save(c);
     }
 
     @DeleteMapping("/{id}")
