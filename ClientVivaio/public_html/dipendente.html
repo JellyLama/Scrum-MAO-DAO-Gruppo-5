@@ -6,28 +6,59 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <title>Vivaio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="APP.js"></script>
         <style>
-            table, th, td {
-                border: 1px solid black;
+            table, td, th {
+                border: 2px solid #ff33bb;
+                color: #ff33bb; 
+                
+            }
+
+            table {
+                border-collapse: collapse;
+               
+
+            }
+
+            th {
+                text-align: center;
+            }
+
+            body{
+
+                background-image:url(./img/vivaio.jpg);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                text-align: center;
+                margin-left: 25%; 
+                margin-right: 25%; 
+                margin-top: 5%; 
+                color: #ff33bb; 
+
+
+
             }
         </style>
     </head>
     <body>
+        <div class="form"><br>
         <h1> Benvenuto dipendente </h1>
         <hr>
-        <h4> Attività non seguite </h4>
-        <table id='attivitaNonSeguite'>
-        </table>
+        <h2> Attività non seguite </h2>
+        <table align="center" id='attivitaNonSeguite'>
+        </table><br><br>
         <script>
             //init APP
             $(document).ready(function () {
                 APP.getAttivitaNonSeguite();
             });
         </script>
+        </div>
     </body>
 </html>
