@@ -172,7 +172,7 @@ var APP = {
         );
         }
         ;
-        };
+        },
         getClienteByUsernameByPassword: function ()
         {
         var username = $("#username").val();
@@ -270,8 +270,8 @@ var APP = {
             },
         getAttivitaNonEvase: function ()
         {
-        var id = APP.getCookie("idCliente")
-        var url = "http://localhost:8080/attivita?evaso=false&idCliente="+id;
+        var idCliente = APP.getCookie("idCliente");
+        var url = "http://localhost:8080/attivita?evaso=false&idCliente=" + idCliente;
                 $.ajax(
                 {
                 url: url,
@@ -372,5 +372,5 @@ var APP = {
                             + '</tr>';
                 }
                 document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;
-            },
+            }
         };
