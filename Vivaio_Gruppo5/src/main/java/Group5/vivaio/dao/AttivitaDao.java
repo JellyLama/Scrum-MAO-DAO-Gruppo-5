@@ -25,10 +25,10 @@ public interface AttivitaDao extends CrudRepository<Attivita, Long>
     @Query(value = "SELECT * FROM attivita a WHERE a.dipendente_id IS NULL",
             nativeQuery = true)
     List<Attivita> findAllAttivitaNonSeguite();
-    
-    @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS TRUE", nativeQuery = true)
-    List<Attivita> findAllAttivitaEvase();
-    
+
+    @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS TRUE AND a.cliente_id = ?1", nativeQuery = true)
+    List<Attivita> findAllAttivitaEvase( Long idCliente );
+
     @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS FALSE", nativeQuery = true)
     List<Attivita> findAllAttivitaNonEvase();
 }
