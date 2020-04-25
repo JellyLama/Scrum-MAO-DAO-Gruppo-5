@@ -134,8 +134,8 @@ var APP =
                 }
                 else if (telefono === "") {
                 window.alert("il campo TELEFONO non può essere vuoto!");
-                
-
+            }
+            else{
                 $.ajax(
                         {
                             url: "http://localhost:8080/clienti",
