@@ -46,7 +46,7 @@ var APP =
                 }
                 document.getElementById("piante").innerHTML = tabellaPiante;
             },
-            getDettagliAttivita: function ()
+            getDettagliAttivita: function (bottone)
             {
                 //gets all post from API
                 $.ajax(
@@ -55,41 +55,67 @@ var APP =
                             method: "GET",
                             success: function (data, status) {
 
-                                APP.showDettagliAttivita(data);
+                                APP.showDettagliAttivita(data, bottone);
                             }
                         }
                 );
             },
-            showDettagliAttivita: function (dettagliAttivita)
+            showDettagliAttivita: function (dettagliAttivita, bottone)
             {
-                var tabellaDettagliAttivita = '<tr>'
-                        + '<th>Tipo</th>'
-                        + '<th>Nome</th>'
-                        + '<th>Necessita Piante</th>'
-                        + '<th>Costo per Ora</th>'
-                        + '<th>Richiedi Attività</th>'
-                        + '</tr>';
-                for (i = 0; i < dettagliAttivita.length; i++) {
-                    var id = dettagliAttivita[i].id;
-                    var nome = dettagliAttivita[i].tipo;
-                    var descrizione = dettagliAttivita[i].nome;
-                    var stagioneFioritura = dettagliAttivita[i].necessitaPiante;
-                    var costoPerOra = dettagliAttivita[i].costoPerOra;
-                    tabellaDettagliAttivita += '<tr>'
-                            + '<td>' + nome + '</td>'
-                            + '<td>' + descrizione + '</td>'
-                            + '<td>' + stagioneFioritura + '</td>'
-                            + '<td>' + costoPerOra + '</td>'
-                            + '<td>' + '<input class="button button1"type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
+                if (bottone === "1")
+                {
+                    var tabellaDettagliAttivita = '<tr>'
+                            + '<th>Tipo</th>'
+                            + '<th>Nome</th>'
+                            + '<th>Necessita Piante</th>'
+                            + '<th>Costo per Ora</th>'
+                            + '<th>Richiedi Attività</th>'
                             + '</tr>';
+                    for (i = 0; i < dettagliAttivita.length; i++) {
+                        var id = dettagliAttivita[i].id;
+                        var nome = dettagliAttivita[i].tipo;
+                        var descrizione = dettagliAttivita[i].nome;
+                        var stagioneFioritura = dettagliAttivita[i].necessitaPiante;
+                        var costoPerOra = dettagliAttivita[i].costoPerOra;
+                        tabellaDettagliAttivita += '<tr>'
+                                + '<td>' + nome + '</td>'
+                                + '<td>' + descrizione + '</td>'
+                                + '<td>' + stagioneFioritura + '</td>'
+                                + '<td>' + costoPerOra + '</td>'
+                                + '<td>' + '<input class="button button1"type="submit" id="richiedi" value="Richiedi Attività">' + '</td>'
+                                + '</tr>';
+                    }
+                    document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
+
+                } else
+                {
+                    var tabellaDettagliAttivita = '<tr>'
+                            + '<th>Tipo</th>'
+                            + '<th>Nome</th>'
+                            + '<th>Necessita Piante</th>'
+                            + '<th>Costo per Ora</th>'
+                            + '</tr>';
+                    for (i = 0; i < dettagliAttivita.length; i++) {
+                        var id = dettagliAttivita[i].id;
+                        var nome = dettagliAttivita[i].tipo;
+                        var descrizione = dettagliAttivita[i].nome;
+                        var stagioneFioritura = dettagliAttivita[i].necessitaPiante;
+                        var costoPerOra = dettagliAttivita[i].costoPerOra;
+                        tabellaDettagliAttivita += '<tr>'
+                                + '<td>' + nome + '</td>'
+                                + '<td>' + descrizione + '</td>'
+                                + '<td>' + stagioneFioritura + '</td>'
+                                + '<td>' + costoPerOra + '</td>'
+                                + '</tr>';
+                    }
+                    document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
                 }
-                document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
             },
 
             insertCliente: function ()
             {
                 var cognome = $("#cognome").val();
-                var nome = $("#nome").val();               
+                var nome = $("#nome").val();
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var telefono = $("#telefono").val();
@@ -182,7 +208,7 @@ var APP =
                             success: function (data, status) {
                                 APP.showAttivitaNonSeguite(data);
                             }
- 
+
                         }
                 );
 
@@ -237,7 +263,7 @@ var APP =
                             success: function (data, status) {
                                 APP.showAttivitaNonEvase(data);
                             }
- 
+
                         }
                 );
 
@@ -279,7 +305,7 @@ var APP =
                             + '<td>' + tipo + '</td>'
                             + '</tr>';
                 }
-  //             document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
+                //             document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
             },
             getAttivitaEvase: function ()
             {
@@ -292,7 +318,7 @@ var APP =
                             success: function (data, status) {
                                 APP.showAttivitaEvase(data);
                             }
- 
+
                         }
                 );
 
@@ -336,5 +362,5 @@ var APP =
                 }
                 document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;
             },
-            
+
         };
