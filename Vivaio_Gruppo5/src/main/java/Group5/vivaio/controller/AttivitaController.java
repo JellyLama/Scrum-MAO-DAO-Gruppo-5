@@ -54,10 +54,10 @@ public class AttivitaController
             return attivitaDao.findAllAttivitaNonSeguite();
     }
     
-    @GetMapping(params ={"evaso"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Attivita> checkEvasoAttivita(HttpServletRequest request, @RequestParam("evaso") boolean evaso){
+    @GetMapping(params ={"evaso","idCliente"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Attivita> checkEvasoAttivita(HttpServletRequest request, @RequestParam("evaso") boolean evaso, @RequestParam("idCliente") Long idCliente){
         if(evaso)
-            return attivitaDao.findAllAttivitaEvase();
+            return attivitaDao.findAllAttivitaEvase(idCliente);
         else
             return attivitaDao.findAllAttivitaNonEvase();
     }

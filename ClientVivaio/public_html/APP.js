@@ -1,8 +1,28 @@
 var APP =
         {
+            setCookie: function (cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            },
+            getCookie: function (cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) === 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            },
             getPiante: function ()
             {
-//gets all post from API
                 $.ajax(
                         {
                             url: "http://localhost:8080/piante",
@@ -86,7 +106,6 @@ var APP =
                                 + '</tr>';
                     }
                     document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
-
                 } else
                 {
                     var tabellaDettagliAttivita = '<tr>'
@@ -111,7 +130,6 @@ var APP =
                     document.getElementById("dettagliAttivita").innerHTML = tabellaDettagliAttivita;
                 }
             },
-
             insertCliente: function ()
             {
                 var cognome = $("#cognome").val();
@@ -119,87 +137,75 @@ var APP =
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var telefono = $("#telefono").val();
-                
                 if (cognome === "") {
-                window.alert("il campo COGNOME non può essere vuoto!");
-                }
-                else if (nome === "") {
-                window.alert("il campo NOME non può essere vuoto!");
-                }
-                else if (username === "") {
-                window.alert("il campo USERNAME non può essere vuoto!");
-                }
-                else if (password === "") {
-                window.alert("il campo PASSWORD non può essere vuoto!");
-                }
-                else if (telefono === "") {
-                window.alert("il campo TELEFONO non può essere vuoto!");
-            }
-            else{
-                $.ajax(
-                        {
-                            url: "http://localhost:8080/clienti",
-                            method: "POST",
-                            contentType: "application/json",
-                            data: JSON.stringify(
-                                    {
-                                        cognome: cognome,
-                                        nome: nome,
-                                        username: username,
-                                        password: password,
-                                        telefono: telefono
+                    window.alert("il campo COGNOME non può essere vuoto!");
+                } else if (nome === "") {
+                    window.alert("il campo NOME non può essere vuoto!");
+                } else if (username === "") {
+                    window.alert("il campo USERNAME non può essere vuoto!");
+                } else if (password === "") {
+                    window.alert("il campo PASSWORD non può essere vuoto!");
+                } else if (telefono === "") {
+                    window.alert("il campo TELEFONO non può essere vuoto!");
+                } else {
+                    $.ajax(
+                            {
+                                url: "http://localhost:8080/clienti",
+                                method: "POST",
+                                contentType: "application/json",
+                                data: JSON.stringify(
+                                        {
+                                            cognome: cognome,
+                                            nome: nome,
+                                            username: username,
+                                            password: password,
+                                            telefono: telefono
 
+                                        }
+                                ),
+                                success: function (data, status) {
+                                },
+                                statusCode: {
+                                    200: function () {
+                                        location.assign("cliente.html");
                                     }
-                            ),
-                            success: function (data, status) {
-                            },
-                            statusCode: {
-                                200: function () {
-                                    location.assign("cliente.html");
                                 }
                             }
-                        }
-                );
-            };
+                    );
+                }
+                ;
             },
             getClienteByUsernameByPassword: function ()
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var url = "http://localhost:8080/clienti?username=" + username + "&password=" + password;
-
                 if (username === "") {
                     window.alert("il campo USERNAME non può essere vuoto!");
-                }
-                ;
-
-                if (password === "") {
+                } else if (password === "") {
                     window.alert("il campo PASSWORD non può essere vuoto!");
-                }
-                ;
-
-                $.ajax(
-                        {
-                            url: url,
-                            method: "GET",
-                            success: function (data, status) {
-                            },
-                            statusCode: {
-                                200: function () {
-                                    location.assign("cliente.html");
+                } else {
+                    $.ajax(
+                            {
+                                url: url,
+                                method: "GET",
+                                success: function (utente) {
+                                },
+                                statusCode: {
+                                    200: function (utente) {
+                                        APP.setCookie("idCliente", utente.id, 1);
+                                        location.assign("cliente.html");
+                                    }
                                 }
                             }
-                        }
-                );
-
+                    );
+                }
             },
-
             getDipendenteByUsernameByPassword: function ()
             {
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var url = "http://localhost:8080/dipendenti?username=" + username + "&password=" + password;
-
                 $.ajax(
                         {
                             url: url,
@@ -217,7 +223,6 @@ var APP =
             getAttivitaNonSeguite: function ()
             {
                 var url = "http://localhost:8080/attivita?seguito=false";
-
                 $.ajax(
                         {
                             url: url,
@@ -228,7 +233,6 @@ var APP =
 
                         }
                 );
-
             },
             showAttivitaNonSeguite: function (attivitaNonSeguite)
             {
@@ -254,7 +258,6 @@ var APP =
                     var costoOrario = attivitaNonSeguite[i].dettagliAttivita.costoPerOra;
                     var necessitaPiante = attivitaNonSeguite[i].dettagliAttivita.necessitaPiante;
                     var tipo = attivitaNonSeguite[i].dettagliAttivita.tipo;
-
                     tabellaAttivitaNonEseguite += '<tr>'
                             + '<td>' + id + '</td>'
                             + '<td>' + dataPrenotazione + '</td>'
@@ -272,7 +275,6 @@ var APP =
             getAttivitaNonEvase: function ()
             {
                 var url = "http://localhost:8080/attivita?evaso=false";
-
                 $.ajax(
                         {
                             url: url,
@@ -283,7 +285,6 @@ var APP =
 
                         }
                 );
-
             },
             showAttivitaNonEvase: function (attivitaNonEvase)
             {
@@ -309,7 +310,6 @@ var APP =
                     var costoOrario = attivitaNonEvase[i].dettagliAttivita.costoPerOra;
                     var necessitaPiante = attivitaNonEvase[i].dettagliAttivita.necessitaPiante;
                     var tipo = attivitaNonEvase[i].dettagliAttivita.tipo;
-
                     tabellaAttivitaNonEvase += '<tr>'
                             + '<td>' + id + '</td>'
                             + '<td>' + dataPrenotazione + '</td>'
@@ -326,19 +326,18 @@ var APP =
             },
             getAttivitaEvase: function ()
             {
-                var url = "http://localhost:8080/attivita?evaso=true";
+                var idCliente = APP.getCookie("idCliente");
+                var url = "http://localhost:8080/attivita?evaso=true&idCliente=" + idCliente;
+                        $.ajax(
+                                {
+                                    url: url,
+                                    method: "GET",
+                                    success: function (data, status) {
+                                        APP.showAttivitaEvase(data);
+                                    }
 
-                $.ajax(
-                        {
-                            url: url,
-                            method: "GET",
-                            success: function (data, status) {
-                                APP.showAttivitaEvase(data);
-                            }
-
-                        }
-                );
-
+                                }
+                        );
             },
             showAttivitaEvase: function (attivitaEvase)
             {
@@ -364,7 +363,6 @@ var APP =
                     var costoOrario = attivitaEvase[i].dettagliAttivita.costoPerOra;
                     var necessitaPiante = attivitaEvase[i].dettagliAttivita.necessitaPiante;
                     var tipo = attivitaEvase[i].dettagliAttivita.tipo;
-
                     tabellaAttivitaEvase += '<tr>'
                             + '<td>' + id + '</td>'
                             + '<td>' + dataPrenotazione + '</td>'
@@ -378,6 +376,5 @@ var APP =
                             + '</tr>';
                 }
                 document.getElementById("attivitaEvase").innerHTML = tabellaAttivitaEvase;
-            }
-
+            },
         };
