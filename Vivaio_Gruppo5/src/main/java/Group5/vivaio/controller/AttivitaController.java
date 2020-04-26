@@ -7,6 +7,11 @@ package Group5.vivaio.controller;
 
 import Group5.vivaio.dao.AttivitaDao;
 import Group5.vivaio.entities.Attivita;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,13 +60,29 @@ public class AttivitaController
             return attivitaDao.findAllAttivitaNonSeguite();
     }
     
-    @GetMapping(params ={"evaso", "idUtente"}, produces = MediaType.APPLICATION_JSON_VALUE)
-
-    public List<Attivita> checkEvasoAttivita(HttpServletRequest request, @RequestParam("evaso") boolean evaso, @RequestParam("idUtente") Long idUtente){
+    @GetMapping(params ={"evaso", "idCliente"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Attivita> checkEvasoAttivitaByCliente(HttpServletRequest request, @RequestParam("evaso") boolean evaso, @RequestParam("idCliente") Long idCliente){
         if(evaso)
-            return attivitaDao.findAllAttivitaEvase(idUtente);
+            return attivitaDao.findAllAttivitaByClienteEvase(idCliente);
         else
-            return attivitaDao.findAllAttivitaNonEvase(idUtente);
+            return attivitaDao.findAllAttivitaByClienteAndNonEvase(idCliente);
+    }
+    
+    @GetMapping(params ={"evaso", "idDipendente"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Attivita> checkEvasoAttivitaByDipendente(HttpServletRequest request, @RequestParam("evaso") boolean evaso, @RequestParam("idDipendente") Long idDipendente){
+        if(evaso)
+            return attivitaDao.findAllAttivitaByDipendenteEvase(idDipendente);
+        else
+            return attivitaDao.findAllAttivitaByDipendenteAndNonEvase(idDipendente);
+    }
+    
+    @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
+    public Attivita patchDipendente(@PathVariable Long id, @RequestBody JsonPatch patch) throws JsonPatchException, JsonProcessingException
+    {
+        Attivita attivita = attivitaDao.findById(id).get();
+        Attivita attivitaAggiornata = applyPatchToAttivita(patch, attivita);
+        attivitaDao.save(attivitaAggiornata);
+        return attivitaAggiornata;
     }
 
     @PostMapping
@@ -75,4 +97,11 @@ public class AttivitaController
         attivitaDao.deleteById(id);
     }
     
+    private Attivita applyPatchToAttivita(
+            JsonPatch patch, Attivita targetAttivita ) throws JsonPatchException, JsonProcessingException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode patched = patch.apply(mapper.convertValue(targetAttivita, JsonNode.class));
+        return mapper.treeToValue(patched, Attivita.class);
+    }
 }

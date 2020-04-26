@@ -27,9 +27,19 @@ public interface AttivitaDao extends CrudRepository<Attivita, Long>
     List<Attivita> findAllAttivitaNonSeguite();
 
     @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS FALSE AND a.cliente_id = ?1", nativeQuery = true)
-    List<Attivita> findAllAttivitaNonEvase( Long idUtente );
+    List<Attivita> findAllAttivitaByClienteAndNonEvase( Long idCliente );
 
     @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS TRUE AND a.cliente_id = ?1", nativeQuery = true)
-    List<Attivita> findAllAttivitaEvase( Long idUtente );
+    List<Attivita> findAllAttivitaByClienteEvase( Long idCliente );
+    
+    @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS FALSE AND a.dipendente_id = ?1", nativeQuery = true)
+    List<Attivita> findAllAttivitaByDipendenteAndNonEvase( Long idDipendente );
+
+    @Query(value = "SELECT * FROM attivita a WHERE a.evaso IS TRUE AND a.dipendente_id = ?1", nativeQuery = true)
+    List<Attivita> findAllAttivitaByDipendenteEvase( Long idDipendente );
+    
+    @Query(value = "UPDATE attivita SET dipendente_id = ?1 WHERE id = ?2", nativeQuery = true)
+    List<Attivita> updateIdDipendenteByIdAttivita(Long idDipendente, Long idAttivita );
+    
 
 }
