@@ -92,6 +92,16 @@ public class AttivitaController
         return attivitaAggiornata;
         
     }
+    
+    @PatchMapping(path = "/{id}", consumes = "application/json-patch+json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Attivita patchEvaso( @PathVariable Long id, @RequestBody JsonPatch patch ) throws JsonPatchException, JsonProcessingException
+    {
+        Attivita attivita = attivitaDao.findById(id).get();
+        Attivita attivitaAggiornata = applyPatchToAttivita(patch, attivita);
+        attivitaDao.save(attivitaAggiornata);
+        return attivitaAggiornata;
+        
+    }
 
     @PostMapping
     public void post( @RequestBody Attivita a )

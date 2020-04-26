@@ -281,7 +281,8 @@ var APP = {
                     success: function (data, status) {
                     },
                     statusCode: {
-                        200: function () {
+                        200: function (dipendente) {
+                            APP.setCookie("idUtente", dipendente.id, 1);
                             location.assign("dipendente.html");
                         }
                     }
@@ -340,10 +341,10 @@ var APP = {
         }
         document.getElementById("attivitaNonSeguite").innerHTML = tabellaAttivitaNonEseguite;
         var buttonsSeguiAttivita = document.getElementsByClassName("buttonSeguiAttivita");
-            for (i = 0; i < buttonsSeguiAttivita.length; i++) {
-                var buttonId = buttonsSeguiAttivita[i].getAttribute("id");
-                $("#" + buttonId).on("click", APP.seguiAttivita);
-            }
+        for (i = 0; i < buttonsSeguiAttivita.length; i++) {
+            var buttonId = buttonsSeguiAttivita[i].getAttribute("id");
+            $("#" + buttonId).on("click", APP.seguiAttivita);
+        }
     },
     seguiAttivita: function ()
     {
@@ -356,11 +357,54 @@ var APP = {
                     method: "PATCH",
                     contentType: "application/json",
                     data: JSON.stringify(
-                                {
-                                    idDipendente: idDipendente
+                            {
+                                idDipendente: idDipendente
 
-                                }),
+                            }),
                     success: function (data, status) {
+                        window.alert("Ora devi eseguire questa attività");
+                        APP.getAttivitaNonSeguite();
+                        APP.getAttivitaNonEvaseByDipendente();
+                    }
+                }
+        );
+    },
+    eseguiAttivita: function ()
+    {
+        var idAttivita = this.id;
+        var idDipendente = APP.getCookie("idUtente");
+        var url = "http://localhost:8080/attivita/" + idAttivita;
+        var date = new Date();
+        var month = '' + (date.getMonth() + 1);
+        var day = '' + date.getDate();
+        var year = date.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        var dataEffettuazione = year + "-" + month + "-" + day;
+        var data = JSON.stringify([
+            {
+                op: "replace",
+                path: "/evaso",
+                value: true
+            },
+            {
+                op: "replace",
+                path: "/dataEffettuazione",
+                value: dataEffettuazione
+            }
+        ]);
+        $.ajax(
+                {
+                    url: url,
+                    method: "PATCH",
+                    contentType: "application/json-patch+json",
+                    data: data,
+                    success: function (data, status) {
+                        window.alert("Attività eseguita");
                         APP.getAttivitaNonSeguite();
                         APP.getAttivitaNonEvaseByDipendente();
                     }
@@ -456,6 +500,7 @@ var APP = {
                 + '<th>Necessita piante</th>'
                 + '<th>Tipo</th>'
                 + '<th>Dipendente</th>'
+                + '<th>Eseguita</th>'
                 + '</tr>';
         for (i = 0; i < attivitaNonEvase.length; i++) {
 
@@ -487,9 +532,15 @@ var APP = {
                     + '<td>' + necessitaPiante + '</td>'
                     + '<td>' + tipo + '</td>'
                     + '<td>' + dipendente + '</td>'
+                    + '<td>' + '<input class="buttonEseguiAttivita" type="submit" id="' + id + '" value="Esegui attività">' + '</td>'
                     + '</tr>';
         }
         document.getElementById("attivitaDaEseguire").innerHTML = tabellaAttivitaNonEvase;
+        var buttonsEseguiAttivita = document.getElementsByClassName("buttonEseguiAttivita");
+        for (i = 0; i < buttonsEseguiAttivita.length; i++) {
+            var buttonId = buttonsEseguiAttivita[i].getAttribute("id");
+            $("#" + buttonId).on("click", APP.eseguiAttivita);
+        }
     },
     getAttivitaEvaseByCliente: function ()
     {

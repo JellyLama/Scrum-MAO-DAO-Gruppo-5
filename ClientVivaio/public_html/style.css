@@ -38,7 +38,7 @@ body{
 }
 
 
-.buttonRichiediAttivita, .buttonSeguiAttivita{
+.buttonRichiediAttivita, .buttonSeguiAttivita, .buttonEseguiAttivita{
 
     color: #ff33bb;
     padding: 6px 12px;
@@ -54,7 +54,7 @@ body{
     border: 2px solid #ff33bb;
 }
 
-.buttonRichiediAttivita, .buttonSeguiAttivita:hover {
+.buttonRichiediAttivita:hover, .buttonSeguiAttivita:hover, .buttonEseguiAttivita:hover {
     background-color: #ff33bb;
     color: white;
 }
