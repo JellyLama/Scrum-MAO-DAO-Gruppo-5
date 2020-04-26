@@ -349,13 +349,20 @@ var APP = {
     {
         var idAttivita = this.id;
         var idDipendente = APP.getCookie("idUtente");
-        var url = "http://localhost:8080/attivita?evaso=false&idCliente=" + idUtente;
+        var url = "http://localhost:8080/attivita/" + idAttivita;
         $.ajax(
                 {
                     url: url,
-                    method: "GET",
+                    method: "PATCH",
+                    contentType: "application/json",
+                    data: JSON.stringify(
+                                {
+                                    idDipendente: idDipendente
+
+                                }),
                     success: function (data, status) {
-                        APP.showAttivitaNonEvaseByCliente(data, idUtente);
+                        APP.getAttivitaNonSeguite();
+                        APP.getAttivitaNonEvaseByDipendente();
                     }
                 }
         );

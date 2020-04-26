@@ -15,6 +15,5 @@ import lombok.Data;
 @Data
 public class AttivitaSoloIdDipendente
 {
-    private Long id;
     private Long idDipendente;
 }

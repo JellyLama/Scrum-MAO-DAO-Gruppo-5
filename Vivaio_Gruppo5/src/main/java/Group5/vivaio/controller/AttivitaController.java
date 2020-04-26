@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Group5.vivaio.controller;
 
 import Group5.vivaio.dao.AttivitaDao;
+import Group5.vivaio.dao.DipendenteDao;
 import Group5.vivaio.entities.Attivita;
+import Group5.vivaio.entities.AttivitaSoloIdDipendente;
+import Group5.vivaio.entities.Dipendente;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +37,9 @@ public class AttivitaController
 {
     @Autowired
     AttivitaDao attivitaDao;
+    
+    @Autowired
+    DipendenteDao dipendenteDAO;
     
     @GetMapping()
     public List<Attivita> getAllAttivita()
@@ -76,13 +77,20 @@ public class AttivitaController
             return attivitaDao.findAllAttivitaByDipendenteAndNonEvase(idDipendente);
     }
     
-    @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
-    public Attivita patchDipendente(@PathVariable Long id, @RequestBody JsonPatch patch) throws JsonPatchException, JsonProcessingException
+    @PatchMapping(path = "/{id}", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Attivita patchDipendente( @PathVariable Long id, @RequestBody AttivitaSoloIdDipendente attivitaSoloIdDipendente ) throws JsonPatchException, JsonProcessingException
     {
+        Long idDipendente = attivitaSoloIdDipendente.getIdDipendente();
+        Dipendente dipendente = dipendenteDAO.findById(idDipendente).get();
         Attivita attivita = attivitaDao.findById(id).get();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonDipendente = mapper.writeValueAsString(dipendente);
+        JsonPatch patch = mapper.readValue("[{ \"op\": \"replace\", \"path\": \"/dipendente\", \"value\":" + jsonDipendente + "}]", JsonPatch.class);
         Attivita attivitaAggiornata = applyPatchToAttivita(patch, attivita);
         attivitaDao.save(attivitaAggiornata);
         return attivitaAggiornata;
+        
     }
 
     @PostMapping
