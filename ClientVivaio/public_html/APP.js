@@ -183,12 +183,23 @@ var APP = {
     {
         var id = this.id;
         var idCliente = APP.getCookie("idCliente");
-        var data = new Date();
+        var date = new Date();
+        var month = '' + (date.getMonth() + 1);
+        var day = '' + date.getDate();
+        var year = date.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        var formatted_date = year + "-" + month + "-" + day;
+
         var attivita = JSON.stringify(
                 {
                     cliente: {id: idCliente},
                     dettagliAttivita: {id: id},
-                    dataPrenotazione: data,
+                    dataPrenotazione: formatted_date,
                     evaso: false
 
                 });
@@ -202,6 +213,8 @@ var APP = {
                     },
                     statusCode: {
                         200: function () {
+                            APP.getAttivitaEvase();
+                            APP.getAttivitaNonEvase();
                             window.alert("Attività prenotata");
                         }
                     }
@@ -368,8 +381,7 @@ var APP = {
             if (dipendente === null)
             {
                 var dipendente = "null";
-            } 
-            else
+            } else
             {
                 var dipendente = attivitaNonEvase[i].dipendente.cognome + " " + attivitaNonEvase[i].dipendente.nome;
             }
@@ -431,8 +443,7 @@ var APP = {
             if (dipendente === null)
             {
                 var dipendente = "null";
-            } 
-            else
+            } else
             {
                 var dipendente = attivitaEvase[i].dipendente.cognome + " " + attivitaEvase[i].dipendente.nome;
             }

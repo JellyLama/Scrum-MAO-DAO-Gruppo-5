@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Data;
 
 
@@ -42,10 +43,10 @@ public class Attivita implements Serializable
     @ManyToOne
     private DettagliAttivita dettagliAttivita;
     
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataPrenotazione;
     
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataEffettuazione;
     
     @Basic
