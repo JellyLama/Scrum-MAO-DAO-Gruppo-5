@@ -64,14 +64,12 @@ and open the template in the editor.
             <h2> Attività da eseguire </h2>
             <table align="center" id='attivitaDaEseguire'>
             </table>
-            
-            <br><br>
 
             <script>
                 //init APP
                 $(document).ready(function () {
                     APP.getAttivitaNonSeguite();
-                    APP.getAttivitaNonEvaseByDipendente();
+                    APP.getAttivitaDaEseguire();
                 });
             </script>
         </div>

@@ -213,8 +213,8 @@ var APP = {
                     },
                     statusCode: {
                         200: function () {
-                            APP.getAttivitaEvaseByCliente();
-                            APP.getAttivitaNonEvaseByCliente();
+                            APP.getAttivitaEvase();
+                            APP.getAttivitaNonEvase();
                             window.alert("Attività prenotata");
                         }
                     }
@@ -312,7 +312,6 @@ var APP = {
                 + '<th>Costo orario</th>'
                 + '<th>Necessita piante</th>'
                 + '<th>Tipo</th>'
-                + '<th>Segui</th>'
                 + '</tr>';
         for (i = 0; i < attivitaNonSeguite.length; i++) {
 
@@ -335,46 +334,25 @@ var APP = {
                     + '<td>' + costoOrario + '</td>'
                     + '<td>' + necessitaPiante + '</td>'
                     + '<td>' + tipo + '</td>'
-                    + '<td>' + '<input class="buttonSeguiAttivita" type="submit" id="' + id + '" value="Segui attività">' + '</td>'
                     + '</tr>';
         }
         document.getElementById("attivitaNonSeguite").innerHTML = tabellaAttivitaNonEseguite;
-        var buttonsSeguiAttivita = document.getElementsByClassName("buttonSeguiAttivita");
-            for (i = 0; i < buttonsSeguiAttivita.length; i++) {
-                var buttonId = buttonsSeguiAttivita[i].getAttribute("id");
-                $("#" + buttonId).on("click", APP.seguiAttivita);
-            }
     },
-    seguiAttivita: function ()
-    {
-        var idAttivita = this.id;
-        var idDipendente = APP.getCookie("idUtente");
-        var url = "http://localhost:8080/attivita?evaso=false&idCliente=" + idUtente;
-        $.ajax(
-                {
-                    url: url,
-                    method: "GET",
-                    success: function (data, status) {
-                        APP.showAttivitaNonEvaseByCliente(data, idUtente);
-                    }
-                }
-        );
-    },
-    getAttivitaNonEvaseByCliente: function ()
+    getAttivitaNonEvase: function ()
     {
         var idUtente = APP.getCookie("idUtente");
-        var url = "http://localhost:8080/attivita?evaso=false&idCliente=" + idUtente;
+        var url = "http://localhost:8080/attivita?evaso=false&idUtente=" + idUtente;
         $.ajax(
                 {
                     url: url,
                     method: "GET",
                     success: function (data, status) {
-                        APP.showAttivitaNonEvaseByCliente(data, idUtente);
+                        APP.showAttivitaNonEvase(data, idUtente);
                     }
                 }
         );
     },
-    showAttivitaNonEvaseByCliente: function (attivitaNonEvase)
+    showAttivitaNonEvase: function (attivitaNonEvase)
     {
         var tabellaAttivitaNonEvase = '<tr>'
                 + '<th>id</th>'
@@ -425,13 +403,13 @@ var APP = {
     getAttivitaNonEvaseByDipendente: function ()
     {
         var idUtente = APP.getCookie("idUtente");
-        var url = "http://localhost:8080/attivita?evaso=false&idDipendente=" + idUtente;
+        var url = "http://localhost:8080/attivita?evaso=false&idUtente=" + idUtente;
         $.ajax(
                 {
                     url: url,
                     method: "GET",
                     success: function (data, status) {
-                        APP.showAttivitaNonEvaseByDipendente(data, idUtente);
+                        APP.showAttivitaNonEvase(data, idUtente);
                     }
                 }
         );
@@ -482,24 +460,24 @@ var APP = {
                     + '<td>' + dipendente + '</td>'
                     + '</tr>';
         }
-        document.getElementById("attivitaDaEseguire").innerHTML = tabellaAttivitaNonEvase;
+        document.getElementById("attivitaNonEvase").innerHTML = tabellaAttivitaNonEvase;
     },
-    getAttivitaEvaseByCliente: function ()
+    getAttivitaEvase: function ()
     {
         var idUtente = APP.getCookie("idUtente");
-        var url = "http://localhost:8080/attivita?evaso=true&idCliente=" + idUtente;
+        var url = "http://localhost:8080/attivita?evaso=true&idUtente=" + idUtente;
         $.ajax(
                 {
                     url: url,
                     method: "GET",
                     success: function (data, status) {
-                        APP.showAttivitaEvaseByCliente(data);
+                        APP.showAttivitaEvase(data);
                     }
 
                 }
         );
     },
-    showAttivitaEvaseByCliente: function (attivitaEvase)
+    showAttivitaEvase: function (attivitaEvase)
     {
         var tabellaAttivitaEvase = '<tr>'
                 + '<th>id</th>'
