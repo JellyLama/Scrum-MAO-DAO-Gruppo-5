@@ -16,12 +16,12 @@ and open the template in the editor.
             table, td, th {
                 border: 2px solid #ff33bb;
                 color: #ff33bb; 
-                
+
             }
 
             table {
                 border-collapse: collapse;
-               
+
 
             }
 
@@ -40,30 +40,38 @@ and open the template in the editor.
                 margin-right: 20%; 
                 margin-top: 5%; 
                 color: #ff33bb; 
-
-
-
             }
         </style>
     </head>
     <body>
         <div class="home_button">
             <a href="index.html">
-            <img alt="" src="img/home.png">
-        </a>        
+                <img alt="" src="img/home.png">
+            </a>        
         </div>
         <div class="form"><br>
-        <h1> Benvenuto dipendente </h1>
-        <hr>
-        <h2> Attività non seguite </h2>
-        <table align="center" id='attivitaNonSeguite'>
-        </table><br><br>
-        <script>
-            //init APP
-            $(document).ready(function () {
-                APP.getAttivitaNonSeguite();
-            });
-        </script>
+
+            <h1> Benvenuto dipendente </h1>
+
+            <hr>
+
+            <h2> Attività non seguite </h2>
+            <table align="center" id='attivitaNonSeguite'>
+            </table>
+
+            <br><br>
+
+            <h2> Attività da eseguire </h2>
+            <table align="center" id='attivitaDaEseguire'>
+            </table>
+
+            <script>
+                //init APP
+                $(document).ready(function () {
+                    APP.getAttivitaNonSeguite();
+                    APP.getAttivitaDaEseguire();
+                });
+            </script>
         </div>
     </body>
 </html>
